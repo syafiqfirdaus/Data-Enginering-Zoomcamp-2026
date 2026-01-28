@@ -1,0 +1,35 @@
+id: 11_taxi_2021_backfill
+namespace: zoomcamp
+description: Backfill 2021 data for Yellow and Green taxis (Jan-July).
+
+tasks:
+  - id: generate_inputs
+    type: io.kestra.plugin.scripts.python.Script
+    taskRunner:
+      type: io.kestra.plugin.core.runner.Process
+    script: |
+      import json
+      taxis = ['yellow', 'green']
+      # 2021 data from Jan to July (01 to 07)
+      months = [f"{i:02d}" for i in range(1, 8)]
+      year = '2021'
+
+      combinations = []
+      for taxi in taxis:
+          for month in months:
+              combinations.append({'taxi': taxi, 'year': year, 'month': month})
+              
+      print(json.dumps(combinations))
+
+  - id: loop_over_combinations
+    type: io.kestra.plugin.core.flow.ForEach
+    values: "{{json(outputs.generate_inputs.stdout)}}"
+    tasks:
+      - id: run_etl_subflow
+        type: io.kestra.plugin.core.flow.Subflow
+        flowId: 10_gcp_taxi_parametrized
+        inputs:
+          taxi: "{{taskrun.value.taxi}}"
+          year: "{{taskrun.value.year}}"
+          month: "{{taskrun.value.month}}"
+        wait: true
