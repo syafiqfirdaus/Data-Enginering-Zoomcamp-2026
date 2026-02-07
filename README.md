@@ -19,3 +19,11 @@ Check the [Module 1 Directory](./01-docker-terraform/README.md) for the detailed
 - [x] Python Script for Data Verification
 
 Check the [Module 2 Directory](./02-workflow-orchestration/) for the Kestra flows and solution details.
+
+### Module 3: Data Warehouse
+
+- [x] External Tables in BigQuery
+- [x] Partitioning & Clustering Strategies
+- [x] SQL Analysis of Yellow Taxi Data (2024)
+
+Check the [Module 3 Directory](./03-data-warehouse/) for the SQL solution and analysis.

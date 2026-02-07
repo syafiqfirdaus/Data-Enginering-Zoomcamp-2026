@@ -26,12 +26,15 @@ wheels/
 
 # Virtual Environment
 venv/
+.venv/
 .env
 
 # Data
 *.parquet
 *.csv
 *.csv.gz
+gcs.json
+*.json
 
 # IDE
 .vscode
