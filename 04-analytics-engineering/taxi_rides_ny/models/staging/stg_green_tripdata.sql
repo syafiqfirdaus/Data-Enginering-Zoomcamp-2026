@@ -5,20 +5,20 @@ with source as (
 renamed as (
     select
         -- identifiers
-        cast(vendorid as integer) as vendor_id,
-        {{ safe_cast('ratecodeid', 'integer') }} as rate_code_id,
-        cast(pulocationid as integer) as pickup_location_id,
-        cast(dolocationid as integer) as dropoff_location_id,
+        cast(cast(vendorid as numeric) as integer) as vendor_id,
+        cast(cast(ratecodeid as numeric) as integer) as rate_code_id,
+        cast(cast(pulocationid as numeric) as integer) as pickup_location_id,
+        cast(cast(dolocationid as numeric) as integer) as dropoff_location_id,
 
         -- timestamps
-        cast(lpep_pickup_datetime as timestamp) as pickup_datetime,  -- lpep = Licensed Passenger Enhancement Program (green taxis)
+        cast(lpep_pickup_datetime as timestamp) as pickup_datetime,
         cast(lpep_dropoff_datetime as timestamp) as dropoff_datetime,
 
         -- trip info
-        cast(store_and_fwd_flag as string) as store_and_fwd_flag,
-        cast(passenger_count as integer) as passenger_count,
+        store_and_fwd_flag,
+        cast(cast(passenger_count as numeric) as integer) as passenger_count,
         cast(trip_distance as numeric) as trip_distance,
-        {{ safe_cast('trip_type', 'integer') }} as trip_type,
+        cast(cast(trip_type as numeric) as integer) as trip_type,
 
         -- payment info
         cast(fare_amount as numeric) as fare_amount,
@@ -29,7 +29,7 @@ renamed as (
         cast(ehail_fee as numeric) as ehail_fee,
         cast(improvement_surcharge as numeric) as improvement_surcharge,
         cast(total_amount as numeric) as total_amount,
-        {{ safe_cast('payment_type', 'integer') }} as payment_type
+        cast(cast(payment_type as numeric) as integer) as payment_type
     from source
     -- Filter out records with null vendor_id (data quality requirement)
     where vendorid is not null
