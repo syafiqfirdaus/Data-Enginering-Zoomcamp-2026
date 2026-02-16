@@ -2,9 +2,7 @@
 
 ## Question 1: dbt Lineage and Execution
 
-**Answer:** `stg_green_tripdata`, `stg_yellow_tripdata`, and `int_trips_unioned` (upstream dependencies)
-*Correction:* The question asks what models will be built with `--select int_trips_unioned`. By default, only the selected model is built unless `+` is used.
-**Revised Answer:** `int_trips_unioned` only.
+**Answer:** `int_trips_unioned` only.
 
 ## Question 2: dbt Tests
 
@@ -15,47 +13,59 @@
 **Query:**
 
 ```sql
-select count(*) from {{ ref('fct_monthly_zone_revenue') }}
+SELECT count(*) 
+FROM `gen-lang-client-0756788832.trips_data_all.fct_monthly_zone_revenue`;
 ```
 
-**Result:** Run the query after successful `dbt build`. (Expected: ~12k-15k rows)
+**Answer:** `12,184` assigned to the closest option. (Actual calculated: `12,514` raw, `12,144` filtered for 2019-2020).
+
+(Note: Ensure `dbt build --full-refresh` is run to include Green 2020 data. Row count includes data for 2019 and 2020.)
 
 ## Question 4: Best Performing Zone for Green Taxis (2020)
 
 **Query:**
 
 ```sql
-select pickup_zone, sum(revenue_monthly_total_amount) as annual_revenue
-from {{ ref('fct_monthly_zone_revenue') }}
-where service_type = 'Green' 
-  and extract(year from revenue_month) = 2020
-group by pickup_zone
-order by annual_revenue desc
-limit 1;
+SELECT pickup_zone, SUM(revenue_monthly_total_amount) as annual_revenue
+FROM `gen-lang-client-0756788832.trips_data_all.fct_monthly_zone_revenue`
+WHERE service_type = 'Green' 
+  AND EXTRACT(YEAR FROM revenue_month) = 2020
+GROUP BY pickup_zone
+ORDER BY annual_revenue DESC
+LIMIT 1;
 ```
 
-**Result:** Run the query. (Likely candidates: East Harlem North, Morningside Heights)
+**Answer:** `East Harlem North`
+
+- East Harlem North: ~$2.0M
+- East Harlem South: ~$1.9M
+- Central Harlem: ~$1.2M
 
 ## Question 5: Green Taxi Trip Counts (October 2019)
 
 **Query:**
 
 ```sql
-select sum(total_monthly_trips) as october_trips
-from {{ ref('fct_monthly_zone_revenue') }}
-where service_type = 'Green' 
-  and extract(year from revenue_month) = 2019 
-  and extract(month from revenue_month) = 10;
+SELECT SUM(total_monthly_trips) as october_trips
+FROM `gen-lang-client-0756788832.trips_data_all.fct_monthly_zone_revenue`
+WHERE service_type = 'Green' 
+  AND EXTRACT(YEAR FROM revenue_month) = 2019 
+  AND EXTRACT(MONTH FROM revenue_month) = 10;
 ```
 
-**Result:** Run the query.
+**Answer:** `472,427`
 
-## Question 6: Build a Staging Model for FHV Data
+(Note: requires Green 2019 data loaded)
+
+## Question 6: FHV Staging Record Count
 
 **Query:**
 
 ```sql
-select count(*) from {{ ref('stg_fhv_tripdata') }}
+SELECT count(*) 
+FROM `gen-lang-client-0756788832.trips_data_all.stg_fhv_tripdata`;
 ```
 
-**Result:** Run the query. (Expected: ~43M rows for full 2019 dataset)
+**Answer:** `43,261,273`
+
+(Note: exact count depends on load completeness, ~43M is expected)

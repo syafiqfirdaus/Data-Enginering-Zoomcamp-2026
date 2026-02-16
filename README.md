@@ -27,3 +27,12 @@ Check the [Module 2 Directory](./02-workflow-orchestration/) for the Kestra flow
 - [x] SQL Analysis of Yellow Taxi Data (2024)
 
 Check the [Module 3 Directory](./03-data-warehouse/) for the SQL solution and analysis.
+
+### Module 4: Analytics Engineering
+
+- [x] dbt Project Configuration
+- [x] Staging & Core Models for Taxi Data
+- [x] Data Visualization with Looker Studio
+- [x] Homework Analysis Completed
+
+Check the [Module 4 Directory](./04-analytics-engineering/) for the dbt models and analysis.
