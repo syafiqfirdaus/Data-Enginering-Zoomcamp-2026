@@ -36,3 +36,12 @@ Check the [Module 3 Directory](./03-data-warehouse/) for the SQL solution and an
 - [x] Homework Analysis Completed
 
 Check the [Module 4 Directory](./04-analytics-engineering/) for the dbt models and analysis.
+
+### Module 5: Data Platform
+
+- [x] Building a Complete Data Platform
+- [x] Data Ingestion Assets
+- [x] Pipeline Configuration & Orchestration
+- [x] Homework Solutions
+
+Check the [Module 5 Directory](./05-data-platform/) for the platform architecture and solutions.
