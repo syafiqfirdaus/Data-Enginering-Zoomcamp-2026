@@ -1,0 +1,15 @@
+version: 1
+
+variables:
+  taxi_types:
+    type: array
+    items:
+      type: string
+    default: ["yellow", "green"]
+
+assets:
+  - name: ingestion.trips
+    path: ../assets/ingestion/trips.py
+    tests:
+      - name: not_null
+        column: pickup_datetime
