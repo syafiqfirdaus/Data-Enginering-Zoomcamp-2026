@@ -39,3 +39,7 @@ gcs.json
 # IDE
 .vscode
 .idea
+
+.bruin.yml
+logs/runs
+logs/*.log
