@@ -45,3 +45,13 @@ Check the [Module 4 Directory](./04-analytics-engineering/) for the dbt models a
 - [x] Homework Solutions
 
 Check the [Module 5 Directory](./05-data-platform/) for the platform architecture and solutions.
+
+### Workshop: dlt Pipeline Ingestion
+
+- [x] Custom REST API Integration with dlt
+- [x] Paginated Data Loading into DuckDB
+- [x] Data Analysis & Homework Questions
+
+Check the [Workshop Directory](./workshop1_ingestion%20with%20dlt/) for implementation details and solutions.
+
+
