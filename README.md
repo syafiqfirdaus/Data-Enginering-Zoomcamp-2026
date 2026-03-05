@@ -46,6 +46,15 @@ Check the [Module 4 Directory](./04-analytics-engineering/) for the dbt models a
 
 Check the [Module 5 Directory](./05-data-platform/) for the platform architecture and solutions.
 
+### Module 6: Batch Processing with Spark
+
+- [x] PySpark Setup & SparkSession Configuration
+- [x] Reading & Repartitioning Parquet Files
+- [x] Analysis of Yellow Taxi Data (Nov 2025)
+- [x] Homework Solutions
+
+Check the [Module 6 Directory](./06-batch/) for the PySpark script and solutions.
+
 ### Workshop: dlt Pipeline Ingestion
 
 - [x] Custom REST API Integration with dlt
@@ -53,5 +62,3 @@ Check the [Module 5 Directory](./05-data-platform/) for the platform architectur
 - [x] Data Analysis & Homework Questions
 
 Check the [Workshop Directory](./workshop1_ingestion%20with%20dlt/) for implementation details and solutions.
-
-
