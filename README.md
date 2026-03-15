@@ -55,6 +55,15 @@ Check the [Module 5 Directory](./05-data-platform/) for the platform architectur
 
 Check the [Module 6 Directory](./06-batch/) for the PySpark script and solutions.
 
+### Module 7: Streaming with PyFlink
+
+- [x] Redpanda (Kafka-compatible) Setup
+- [x] Producer & Consumer Scripts for Green Taxi Data (Oct 2025)
+- [x] Flink Jobs: Tumbling & Session Windows
+- [x] Homework Questions 1-6 Solved
+
+Check the [Module 7 Directory](./07-streaming/) for the Flink jobs, producer/consumer scripts, and detailed solutions.
+
 ### Workshop: dlt Pipeline Ingestion
 
 - [x] Custom REST API Integration with dlt
