@@ -1,0 +1,23 @@
+# Virtual Environments
+venv/
+env/
+__pycache__/
+.pytest_cache/
+
+# Terraform State and Configs
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# Environment Credentials and Keys
+.env
+*.pem
+*.key
+
+# Mac / Windows artifacts
+.DS_Store
+Thumbs.db
+
+# Flink Logs
+*.log
