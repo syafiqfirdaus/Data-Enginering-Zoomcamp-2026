@@ -1,41 +1,72 @@
 # Real-Time Options Market Data Dashboard
 
-An end-to-end streaming data pipeline project for the **Data Engineering Zoomcamp**.
+An end-to-end local streaming pipeline project for the Data Engineering Zoomcamp.
 
 ## Architecture & Technologies
-- **Infrastructure:** AWS EC2, Amazon Redshift Serverless, provisioned via **Terraform**
-- **Data Ingestion:** Python WebSocket producer pulling real-time options trades from **Polygon.io**
-- **Stream Broker:** **Redpanda** (Kafka API compatible)
-- **Stream Processing:** **PyFlink** (Apache Flink) calculating rolling window VWAP (Volume-Weighted Average Price)
-- **Data Warehouse:** **Amazon Redshift**
-- **Dashboard:** **Streamlit**
+- Data ingestion: Python mock options producer
+- Stream broker: Redpanda
+- Stream processing: local Kafka consumer and aggregator
+- Database: PostgreSQL
+- Dashboard: Streamlit
+- Local orchestration: Docker Compose
 
-## Setup Instructions
+## Local Setup
 
-### 1. Provision Infrastructure
-Configure your AWS CLI (`aws configure`), then run:
-```bash
-make tf-init
-make tf-apply
+### 1. Create your local env file
+Copy `.env.example` to `.env`.
+
+Recommended local values:
+```env
+POLYGON_API_KEY=replace-me
+KAFKA_BROKER=localhost:9092
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_DATABASE=options_dashboard
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
 ```
-This automatically deploys an EC2 instance, configures Redpanda Docker, injects SSH keys locally, and sets up Redshift Serverless.
 
-### 2. Start Data Ingestion (Producer)
-Ensure you have a `.env` file containing `POLYGON_API_KEY`. The Terraform step will handle the `KAFKA_BROKER` IP.
+### 2. Start local infrastructure
+From `projects/options-dashboard`:
+```bash
+make local-up
+```
+
+This starts:
+- Redpanda on `localhost:9092`
+- PostgreSQL on `localhost:5432`
+
+### 3. Install Python dependencies
 ```bash
 make producer-install
+make streaming-install
+make dashboard-install
+```
+
+### 4. Create the database table
+```bash
+make create-table
+```
+
+### 5. Run the producer
+```bash
 make producer-run
 ```
 
-### 3. Start PyFlink Streaming
-The Terraform deployment automatically installs Flink and dependencies on the EC2 instance. Navigate to the `terraform` directory and SSH into the machine to start the job. Flink will automatically sink the aggregated metrics mapping to Redshift.
-
-### 4. Run the Dashboard
-Finally, launch the interactive visual Streamlit dashboard:
+### 6. Run the dashboard
 ```bash
-make dashboard-install
 make dashboard-run
 ```
+
+## Streaming Job
+
+The active local streaming path uses `streaming/local_aggregator.py` to read Kafka events, compute 1-minute VWAP aggregates, and write them into PostgreSQL.
+
+## Notes
+
+- The old AWS/Terraform deployment path has been removed from this project.
+- Do not commit `.env`.
+- Treat any previously exposed AWS credentials as permanently compromised.
 
 ## Dashboard Previews
 

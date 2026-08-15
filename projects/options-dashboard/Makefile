@@ -1,26 +1,26 @@
-.PHONY: tf-init tf-plan tf-apply tf-destroy producer-install producer-run dashboard-install dashboard-run
+.PHONY: local-up local-down producer-install producer-run streaming-install create-table streaming-run-local dashboard-install dashboard-run
 
-# Terraform commands
-tf-init:
-	cd terraform && terraform init
+local-up:
+	docker compose up -d
 
-tf-plan:
-	cd terraform && terraform plan
+local-down:
+	docker compose down
 
-tf-apply:
-	cd terraform && terraform apply -auto-approve
-
-tf-destroy:
-	cd terraform && terraform destroy
-
-# Producer commands
 producer-install:
 	cd producer && pip install -r requirements.txt
 
 producer-run:
 	cd producer && python main.py
 
-# Dashboard commands
+streaming-install:
+	cd streaming && pip install -r requirements.txt
+
+create-table:
+	cd streaming && python create_table.py
+
+streaming-run-local:
+	cd streaming && python local_aggregator.py
+
 dashboard-install:
 	cd dashboard && pip install -r requirements.txt
 
