@@ -1,3 +1,2 @@
-polygon-api-client
 confluent-kafka
 python-dotenv

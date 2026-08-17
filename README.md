@@ -72,11 +72,11 @@ Check the [Module 7 Directory](./07-streaming/) for the Flink jobs, producer/con
 
 Check the [Workshop Directory](./workshop1_ingestion%20with%20dlt/) for implementation details and solutions.
 
-### Capstone Project: Real-Time Options Dashboard
+### Capstone Project: Simulated Real-Time Options Dashboard
 
-- [x] Provisioned AWS EC2 and Amazon Redshift Serverless via Terraform
-- [x] Real-time data ingestion producer to Redpanda Message Broker
-- [x] Stream Processing pipeline using Apache Flink to calculate VWAP
+- [x] Local PostgreSQL and Redpanda services via Docker Compose
+- [x] Mock options-trade producer publishing to Redpanda
+- [x] Local stream aggregation pipeline calculating VWAP
 - [x] Interactive Streamlit Dashboard visualization
 
-Check the [Projects Directory](./projects/options-dashboard/README.md) for the complete architecture overview, setup instructions, and visuals of the final pipeline.
+The producer generates simulated trades rather than consuming live Polygon data. Check the [Projects Directory](./projects/options-dashboard/README.md) for the current local architecture, setup instructions, and dashboard previews.

@@ -1,9 +1,9 @@
-# Real-Time Options Market Data Dashboard
+# Simulated Real-Time Options Market Data Dashboard
 
-An end-to-end local streaming pipeline project for the Data Engineering Zoomcamp.
+An end-to-end local streaming pipeline project for the Data Engineering Zoomcamp. The producer generates mock options trades; it does not consume live Polygon market data.
 
 ## Architecture & Technologies
-- Data ingestion: Python mock options producer
+- Data ingestion: Python producer generating simulated options trades
 - Stream broker: Redpanda
 - Stream processing: local Kafka consumer and aggregator
 - Database: PostgreSQL
@@ -17,7 +17,6 @@ Copy `.env.example` to `.env`.
 
 Recommended local values:
 ```env
-POLYGON_API_KEY=replace-me
 KAFKA_BROKER=localhost:9092
 POSTGRES_HOST=localhost
 POSTGRES_PORT=5432
@@ -33,8 +32,10 @@ make local-up
 ```
 
 This starts:
-- Redpanda on `localhost:9092`
-- PostgreSQL on `localhost:5432`
+- Redpanda on `127.0.0.1:9092`
+- PostgreSQL on `127.0.0.1:5432`
+
+Docker Compose binds the published ports to the loopback interface, so the local services are not exposed on other host network interfaces.
 
 ### 3. Install Python dependencies
 ```bash
@@ -52,6 +53,8 @@ make create-table
 ```bash
 make producer-run
 ```
+
+The producer continuously generates mock options trades for demonstrating the streaming pipeline. It does not connect to Polygon or another live market-data provider.
 
 ### 6. Run the dashboard
 ```bash

@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 
-TOPIC_NAME = "polygon-options-stream"
+TOPIC_NAME = "options-trades-stream"
 
 
 def get_required_env(name: str) -> str:

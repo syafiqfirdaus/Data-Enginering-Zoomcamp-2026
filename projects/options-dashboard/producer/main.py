@@ -13,14 +13,14 @@ load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 # Kafka configuration
 kafka_config = {
     "bootstrap.servers": os.getenv("KAFKA_BROKER", "localhost:9092"),
-    "client.id": "polygon-producer",
+    "client.id": "mock-options-producer",
 }
 producer = Producer(kafka_config)
-TOPIC_NAME = "polygon-options-stream"
+TOPIC_NAME = "options-trades-stream"
 
 
 def main():
-    print("Starting Mock Options WebSocket client (Bypassing Polygon.io Free Tier Limit)...")
+    print("Starting simulated options-trade producer...")
     symbols = [
         "SPY241220C0500",
         "AAPL240119C0150",
